@@ -1,1 +1,10 @@
-<h1>Topページ</h1>
+<h1>注文履歴一覧</h1>
+<% Order.all.each do |order| %>
+<div>
+  <p>購入日時：<%= order.created_at.strftime('%Y/%m/%d') %></p>
+  <p>購入者：<%= order.customer.last_name ＋ order.customer.first_name %></p>
+  <p>注文個数：<%= order_id.amount %></p>
+  <p>注文ステータス</p>
+
+</div>
+<% end %>

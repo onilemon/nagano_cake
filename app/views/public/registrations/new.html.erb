@@ -1,6 +1,6 @@
-<h2>Sign up</h2>
+<h2>新規会員登録</h2>
 
-<%= form_with model: @public, url: registration_path do |f| %>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "public/shared/error_messages", resource: resource %>
   <div class="field">
   <%= f.label :last_name, "姓" %><br>
@@ -28,7 +28,7 @@
   </div>
 
   <div class="field">
-  <%= f.label :postal_code, "郵便番号" %><br>
+  <%= f.label :postal_code, "郵便番号(ハイフンなし)" %><br>
   <%= f.text_field :postal_code %>
   </div>
 
@@ -38,15 +38,12 @@
   </div>
 
   <div class="field">
-  <%= f.label :telephone_number, "電話番号" %><br>
+  <%= f.label :telephone_number, "電話番号(ハイフンなし)" %><br>
   <%= f.text_field :telephone_number %>
   </div>
 
   <div class="field">
-    <%= f.label :password, "パスワード(６文字以上)" %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
+    <%= f.label :password, "パスワード(６文字以上)" %><br />
     <%= f.password_field :password, autocomplete: "new-password" %>
   </div>
 
@@ -56,8 +53,9 @@
   </div>
 
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.submit "新規登録" %>
   </div>
 <% end %>
 
-<%= render "public/shared/links" %>
+<h2>既に登録済みの方</h2>
+<%= render "public/shared/links" %> からログインしてください
