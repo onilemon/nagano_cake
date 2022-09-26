@@ -1,0 +1,15 @@
+<h1>ショッピングカート</h1>
+<% @cart_items.each do |cart_item| %>
+  <div>
+    <p>商品名：<%= cart_item.item.name %></p>
+    <p>単価（税込）：<%= cart_item.item.add_tax_price.to_s(:delimited) %></p>
+    <%= form_with model: @cart_item, local: true do |f| %>
+      数量<%= f.select :amount, [*1..10] %>
+    <% end %>
+    <p> 小計 ：<%= cart_item.sum_of_price %></p>
+    合計金額 : <% current_customer.cart_items.each do |cart_item| %>
+               ¥<%= @total.round.to_s(:delimited)%>
+               <% end %>
+    </div>
+
+<% end %>

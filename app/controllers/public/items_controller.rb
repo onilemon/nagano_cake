@@ -1,3 +1,16 @@
 class Public::ItemsController < ApplicationController
-  
+  def index
+    @items = Item.all.order(created_at: :desc)
+  end
+
+  def show
+    @cart_item = CartItem.new
+    @item = Item.find(params[:id])
+  end
+
+  private
+
+  def item_params
+    params.require(:item).permit(:image, :name, :introduction, :genre_id, :price)
+  end
 end
