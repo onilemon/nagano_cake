@@ -10,11 +10,24 @@ class Public::CustomersController < ApplicationController
   end
 
   def update
-    if current_customer.update(customer_params)
+    @customer = current_customer
+    if @customer.update(customer_params)
     redirect_to customer_path
     else
     render :edit
     end
+  end
+
+  def unsubscribe
+    @customer = current_customer
+  end
+
+  def withdrawal
+    @customer = current_customer
+    @customer.update(is_deleted: true)
+    reset_session
+    flash[:notice] = "退会処理を実行いたしました"
+    redirect_to new_customer_registration_path
   end
 
   private
