@@ -13,7 +13,7 @@ class Admin::ItemsController < ApplicationController
   end
 
   def index
-    @items = Item.all
+    @items = Item.page(params[:page])
   end
 
   def show
@@ -30,7 +30,7 @@ class Admin::ItemsController < ApplicationController
     redirect_to admin_item_path
   end
 
-   private
+  private
 
   def item_params
     params.require(:item).permit(:image, :name, :introduction, :genre_id, :price, :is_active)

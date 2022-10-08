@@ -1,4 +1,8 @@
 <h1>商品一覧</h1>
+<p><%= link_to new_admin_item_path, class: 'nav-link text-light' do %>
+<i class="fas fa-plus-circle"></i>
+<% end %></p>
+
 <% @items.each do |item| %>
 <div>
   <p>商品ID：<%= item.id %></p>
@@ -12,3 +16,4 @@
   <% end %>
 </div>
 <% end %>
+<%= paginate @items %>

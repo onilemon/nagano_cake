@@ -1,0 +1,27 @@
+<h1>注文履歴詳細</h1>
+
+  <p>購入者 : <%= link_to @order.customer.last_name + @order.customer.first_name, admin_customer_path(@customer.id) %></p>
+  <p>注文日 : <%= @order.created_at.strftime('%Y/%m/%d') %></p>
+  <p>配送先 : 〒<%= @order.postal_code + @order.address %><br><%= @order.name %></p>
+  <p>支払方法 : <%= @order.payment_method_i18n %></p>
+  <p>注文ステータス</p>
+  <%= form_with model: @order, url: admin_order_path(@order.id) do |f| %>
+  <%= f.select :status, Order.statuses_i18n.keys.map{|k| [I18n.t("enums.order.status.#{k}"), k]} %>
+  <%= f.submit "更新" %>
+  <% end %>
+
+<% @order_details.each do |order_detail| %>
+  <p>商品名 : <%= order_detail.item.name %></p>
+  <p>単価（税込） : <%= order_detail.price.to_s(:delimited) %> </p>
+  <p>数量 : <%= order_detail.amount %></p>
+  <p>小計：<%= order_detail.sum_of_price.to_s(:delimited) %></p>
+  <p>制作ステータス</p>
+  <%= form_with model:order_detail, url: admin_order_detail_path(order_detail.id) do |f| %>
+  <%= f.select :making_status, OrderDetail.making_statuses_i18n.keys.map{|k| [I18n.t("enums.order_detail.making_status.#{k}"), k]} %>
+  <%= f.submit "更新" %>
+  <% end %>
+<% end %>
+
+<p>商品合計 : <%= @total.round.to_s(:delimited) %></p>
+<p>送料 : <%= @order.postage %></p>
+<p>請求金額合計 : <%= (@order.postage + @total.round).to_s(:delimited) %></p>

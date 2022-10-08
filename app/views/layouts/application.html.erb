@@ -6,15 +6,15 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
     <header>
+    <%= link_to image_tag('nagano_cakelogo.jpeg'), root_path %>
       <% if admin_signed_in? %>
         <% if request.fullpath.include? "/admin" %>
-          
           <li>
             <%= link_to "商品一覧", admin_items_path %>
           </li>
@@ -31,6 +31,7 @@
             <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
         　</li>
         <% else %>
+
         <li>
           <%= link_to "About", about_path %>
         </li>
@@ -45,6 +46,7 @@
         </li>
         <% end %>
     <% elsif customer_signed_in? %>
+      <%= "ようこそ、#{current_customer.last_name}さん！" %>
       <li>
         <%= link_to "マイページ", customer_path(current_customer.id) %>
       </li>

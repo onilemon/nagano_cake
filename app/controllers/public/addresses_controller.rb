@@ -29,7 +29,7 @@ class Public::AddressesController < ApplicationController
     redirect_to addresses_path(@address.id)
   end
 
-   private
+  private
 
   def address_params
     params.require(:address).permit(:customer_id, :name, :postal_code, :address)

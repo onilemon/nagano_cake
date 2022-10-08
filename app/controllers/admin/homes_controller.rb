@@ -1,5 +1,6 @@
 class Admin::HomesController < ApplicationController
   def top
-   @order = Order.all
+   @orders = Order.all.order(created_at: :desc)
   end
+
 end
