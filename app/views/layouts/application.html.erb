@@ -12,68 +12,88 @@
 
   <body>
     <header>
-    <%= link_to image_tag('nagano_cakelogo.jpeg'), root_path %>
-      <% if admin_signed_in? %>
-        <% if request.fullpath.include? "/admin" %>
-          <li>
-            <%= link_to "商品一覧", admin_items_path %>
-          </li>
-          <li>
-            <%= link_to "会員一覧", admin_customers_path %>
-          </li>
-          <li>
-            <%= link_to "注文履歴一覧", admin_root_path %>
-          </li>
-          <li>
-            <%= link_to "ジャンル一覧", admin_genres_path %>
-          </li>
-          <li>
-            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
-        　</li>
-        <% else %>
+      <nav class="navbar navbar-expand-lg ">
+        <div class="container">
+          <a class="navbar-brand p-1" href="/"><%= image_tag('nagano_cakelogo.jpeg') %></a>
+          <div class="row justify-content-evenly">
 
-        <li>
-          <%= link_to "About", about_path %>
-        </li>
-        <li>
-          <%= link_to "商品一覧", items_path %>
-        </li>
-        <li>
-          <%= link_to "新規登録", new_customer_registration_path %>
-        </li>
-        <li>
-          <%= link_to "ログイン", customer_session_path %>
-        </li>
-        <% end %>
-    <% elsif customer_signed_in? %>
-      <%= "ようこそ、#{current_customer.last_name}さん！" %>
-      <li>
-        <%= link_to "マイページ", customer_path(current_customer.id) %>
-      </li>
-      <li>
-        <%= link_to "商品一覧", items_path %>
-      </li>
-      <li>
-        <%= link_to "カート", cart_items_path %>
-      </li>
-      <li>
-        <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
-      </li>
-    <% else %>
-      <li>
-        <%= link_to "About", about_path %>
-      </li>
-      <li>
-        <%= link_to "商品一覧", items_path %>
-      </li>
-      <li>
-        <%= link_to "新規登録", new_customer_registration_path %>
-      </li>
-      <li>
-        <%= link_to "ログイン", customer_session_path %>
-      </li>
-    <% end %>
+          <% if admin_signed_in? %>
+            <% if request.fullpath.include? "/admin" %>
+              <li class="nav-item list-unstyled ml-4">
+                <%= link_to "商品一覧", admin_items_path, class:"btn btn-light" %>
+              </li>
 
+              <li class="nav-item list-unstyled ml-4">
+                <%= link_to "会員一覧", admin_customers_path, class:"btn btn-light" %>
+              </li>
+
+              <li class="nav-item list-unstyled ml-4">
+                <%= link_to "注文履歴一覧", admin_root_path, class:"btn btn-light" %>
+              </li>
+
+              <li class="nav-item list-unstyled ml-4">
+                <%= link_to "ジャンル一覧", admin_genres_path, class:"btn btn-light" %>
+              </li>
+
+              <li class="nav-item list-unstyled ml-4">
+                <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class:"btn btn-light" %>
+            　</li>
+            <% else %>
+              <li class="nav-item list-unstyled ml-4">
+                <%= link_to "About", about_path, class:"btn btn-light" %>
+              </li>
+
+              <li class="nav-item list-unstyled ml-4">
+                <%= link_to "商品一覧", items_path, class:"btn btn-light" %>
+              </li>
+
+              <li class="nav-item list-unstyled ml-4">
+                <%= link_to "新規登録", new_customer_registration_path, class:"btn btn-light" %>
+              </li>
+
+              <li class="nav-item list-unstyled ml-4">
+                <%= link_to "ログイン", customer_session_path, class:"btn btn-light" %>
+              </li>
+            <% end %>
+          <% elsif customer_signed_in? %>
+            <%= "ようこそ、#{current_customer.last_name}さん！" %>
+            <li class="nav-item list-unstyled ml-4">
+              <%= link_to "マイページ", customer_path(current_customer.id), class:"btn btn-light" %>
+            </li>
+
+            <li class="nav-item list-unstyled ml-4">
+              <%= link_to "商品一覧", items_path, class:"btn btn-light" %>
+            </li>
+
+            <li class="nav-item list-unstyled ml-4">
+              <%= link_to "カート", cart_items_path, class:"btn btn-light" %>
+            </li>
+
+            <li class="nav-item list-unstyled ml-4">
+              <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class:"btn btn-light" %>
+            </li>
+          <% else %>
+            <li class="nav-item list-unstyled ml-4">
+              <%= link_to "About", about_path, class:"btn btn-light" %>
+            </li>
+
+            <li class="nav-item list-unstyled ml-4">
+              <%= link_to "商品一覧", items_path, class:"btn btn-light" %>
+            </li>
+
+            <li class="nav-item list-unstyled ml-4">
+              <%= link_to "新規登録", new_customer_registration_path, class:"btn btn-light" %>
+            </li>
+
+            <li class="nav-item list-unstyled ml-4">
+              <%= link_to "ログイン", customer_session_path, class:"btn btn-light" %>
+            </li>
+          <% end %>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <p class="border-bottom"></p>
     </header>
     <%= yield %>
   </body>
