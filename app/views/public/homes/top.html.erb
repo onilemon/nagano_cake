@@ -1,13 +1,24 @@
-<p>ようこそ、ながのCAKEへ！<br>
-このサイトは、ケーキ販売のECサイトになります。<br>
-会員でない方も商品の閲覧はできますが、<br>
-購入には会員登録が必要になります。</p>
-<h1>新着商品</h1>
-<% @items.each do |item| %>
-<div>
-  <%= link_to item_path(item.id) do %>
-  <%= image_tag item.get_image %>
-  <% end %>
-  <p>商品名：<%= item.name %></p>
-  <p>¥<%= item.add_tax_price.to_s(:delimited) %></p>
-<% end %>
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <p>ようこそ、ながのCAKEへ！<br>
+    このサイトは、ケーキ販売のECサイトになります。<br>
+    会員でない方も商品の閲覧はできますが、<br>
+    購入には会員登録が必要になります。</p>
+  </div>
+    <p>新着商品</p>
+    <div class="row justify-content-center">
+      <% @items.each do |item| %>
+      <div class= "col-3">
+        <div><%= link_to item_path(item.id) do %>
+              <%= image_tag item.get_image %>
+              <% end %>
+        </div>
+        <p><%= item.name %></p>
+        ¥<%= item.add_tax_price.to_s(:delimited) %>
+      </div>
+      <% end %>
+    </div>
+    <div class="d-flex justify-content-end">
+      <%= link_to "全ての商品を見る", items_path %>
+    </div>
+</div>
