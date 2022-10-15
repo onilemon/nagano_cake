@@ -1,48 +1,39 @@
-<h1>会員情報編集</h1>
-<%= form_with model:@customer do |f| %>
-  <div class="field">
-  <%= f.label :last_name, "姓" %><br>
-  <%= f.text_field :last_name %>
+<div class="container">
+  <div class="row justify-content-start">
+    <h3>会員情報編集</h3>
   </div>
-
-  <div class="field">
-  <%= f.label :first_name, "名" %><br>
-  <%= f.text_field :first_name %>
-  </div>
-
-  <div class="field">
-  <%= f.label :last_name_kana, "姓カナ" %><br>
-  <%= f.text_field :last_name_kana %>
-  </div>
-
-  <div class="field">
-  <%= f.label :first_name_kana, "名カナ" %><br>
-  <%= f.text_field :first_name_kana %>
-  </div>
-
-  <div class="field">
-  <%= f.label :postal_code, "郵便番号" %><br>
-  <%= f.text_field :postal_code %>
-  </div>
-  
-  <div class="field">
-  <%= f.label :address, "住所" %><br>
-  <%= f.text_field :address %>
-  </div>
-  
-  <div class="field">
-  <%= f.label :telephone_number, "電話番号" %><br>
-  <%= f.text_field :telephone_number %>
-  </div>
-  
-  <div class="field">
-    <%= f.label :email, "メールアドレス" %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "編集内容を保存" %>
-  </div>
-<% end %>
-
-<%= link_to "退会する", customers_unsubscribe_path %>
+  <div class="row justify-content-center">
+    <%= form_with model:@customer do |f| %>
+      <table>
+        <tr>
+          <td>氏名</td>
+          <td><%= f.text_field :last_name, class: "mb-3 mx-3" %> <%= f.text_field :first_name, class: "mb-3" %></td>
+        </tr>
+        <tr>
+          <td>フリガナ</td>
+          <td><%= f.text_field :last_name_kana, class: "mb-3 mx-3" %> <%= f.text_field :first_name_kana, class: "mb-3" %></td>
+        </tr>
+        <tr>
+          <td>郵便番号</td>
+          <td><%= f.text_field :postal_code, class: "ml-3 mb-3" %></td>
+        </tr>
+        <tr>
+          <td>住所</td>
+          <td colspan="2"><%= f.text_field :address, class: "ml-3 mb-3", size: "60" %></td>
+        </tr>
+        <tr>
+          <td>電話番号</td>
+          <td><%= f.text_field :telephone_number, class: "ml-3 mb-3" %></td>
+        </tr>
+        <tr>
+          <td>メールアドレス</td>
+          <td><%= f.email_field :email, autofocus: true, autocomplete: "email", class: "ml-3 mb-3" %></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><%= f.submit "編集内容を保存", class: "btn btn-sm btn-success ml-3" %></td>
+          <td><%= link_to "退会する", customers_unsubscribe_path, class: "btn btn-sm btn-danger" %></td>
+        </tr>
+      </table>
+    <% end %>
+</div>

@@ -1,10 +1,26 @@
-<%= image_tag @item.get_image %>
-  <p>商品名：<%= @item.name %></p>
-  <p>商品説明：<%= @item.introduction %></p>
-  <p>税込価格：<%= @item.add_tax_price.to_s(:delimited) %> 円</p>
-  <%= form_with model: @cart_item, local: true do |f| %>
+<div class="container">
+  <div class="row justify-content-center">
+    <%= image_tag @item.get_image, class: "mr-5" %>
+      <table>
+        <tr>
+          <td><h3><%= @item.name %></h3></td>
+        </tr>
+        <tr>
+          <td><h4><%= @item.introduction %></h4></td>
+        </tr>
+        <tr>
+          <td><h3>¥<%= @item.add_tax_price.to_s(:delimited) %>(税込）</h3></td>
+        </tr>
+      </table>
+  </div>
+  <div class="row justify-content-center">
+    <%= form_with model: @cart_item, local: true do |f| %>
     <%= f.hidden_field :item_id, value: @item.id %>
-    <%= f.select :amount, [*1..10] %>
-    <%= f.submit "カートに入れる" %>
-  <% end %>
-  
+    <table>
+      <tr>
+        <td><%= f.select :amount, [*1..10], { include_blank: '個数選択'} %> <%= f.submit "カートに入れる", class:"btn btn-success ml-5" %></td>
+      </tr>
+    </table>
+  </div>
+    <% end %>
+</div>

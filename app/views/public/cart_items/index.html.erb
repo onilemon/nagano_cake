@@ -1,18 +1,54 @@
-<h1>ショッピングカート</h1>
-<%= link_to "カートを空にする", destroy_all_cart_items_path, method: :delete, class: "btn btn-sm btn-danger" %>
-<% @cart_items.each do |cart_item| %>
-  <div>
-    <p>商品名：<%= cart_item.item.name %></p>
-    <p>単価（税込）：<%= cart_item.item.add_tax_price.to_s(:delimited) %></p>
-    <%= form_with model: cart_item, local: true do |f| %>
-      数量<%= f.select :amount, [*1..10] %>
-      <%= f.submit "変更", class: "btn btn-sm btn-success" %>
-    <% end %>
-    <p>小計 ：<%= cart_item.sum_of_price.to_s(:delimited) %></p>
-    <%= link_to "削除する" , cart_item_path(cart_item.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-sm btn-danger" %>
-  </div>
-<% end %>
-合計金額 : ¥<%= @total.round.to_s(:delimited)%>
+<div class="container">
+    <div class="row">
+      <div class="col-8">
+        <h3>ショッピングカート</h3>
+      </div>
+      <div class="col-4">
+      <%= link_to "カートを空にする", destroy_all_cart_items_path, method: :delete, class: "btn btn-sm btn-danger" %>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <% @cart_items.each do |cart_item| %>
+        <table class= "table table-bordered">
+          <thead>
+            <tr>
+              <th>商品名</th>
+              <th>単価（税込）</th>
+              <th>数量</th>
+              <th>小計</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%= cart_item.item.name %></td>
+              <td><%= cart_item.item.add_tax_price.to_s(:delimited) %></td>
+              <%= form_with model: cart_item, local: true do |f| %>
+              <td><%= f.select :amount, [*1..10] %> <%= f.submit "変更", class: "btn btn-sm btn-success" %></td>
+              <% end %>
+              <td><%= cart_item.sum_of_price.to_s(:delimited) %></td>
+              <td><%= link_to "削除する" , cart_item_path(cart_item.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-sm btn-danger" %></td>
+            </tr>
+          </tbody>
+        </table>
+      <% end %>
+    </div>
+    <div class="row">
+      <div class="col-8">
+        <%= link_to "買い物を続ける", root_path, class: "btn btn-sm btn-primary" %>
+      </div>
+      <div class="col-4">
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <td>合計金額 : ¥<%= @total.round.to_s(:delimited)%></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <%= link_to "情報入力に進む", new_order_path, class: "btn btn-sm btn-success" %>
+    </div
 
-<%= link_to "買い物を続ける", root_path, class: "btn btn-sm btn-primary" %>
-<%= link_to "情報入力に進む", new_order_path, class: "btn btn-sm btn-success" %>
+</div>
