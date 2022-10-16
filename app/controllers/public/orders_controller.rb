@@ -42,6 +42,7 @@ class Public::OrdersController < ApplicationController
       @order_detail.save
     end
     redirect_to complete_orders_path
+    current_customer.cart_items.destroy_all
   end
 
   def index
