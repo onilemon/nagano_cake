@@ -2,6 +2,7 @@
   <h3>注文履歴詳細</h3>
     <div class="row justify-content-end">
       <div class= "col">
+        <%= form_with model: @order, url: admin_order_path(@order.id), method: :patch do |f| %>
       <table>
         <tr>
           <td><strong>購入者</strong></td>
@@ -21,15 +22,14 @@
         </tr>
         <tr>
           <td><strong>注文ステータス</strong></td>
-          <%= form_with model: @order, url: admin_order_path(@order.id) do |f| %>
           <td><%= f.select :status, Order.statuses_i18n.keys.map{|k| [I18n.t("enums.order.status.#{k}"), k]} %></td>
           <td><%= f.submit "更新", class: "btn btn-success" %></td>
-          <% end %>
+        <% end %>
         </tr>
       </table>
       </div>
     </div>
-    
+
     <div class="row">
       <div class= "col-8">
         <table class= "table">
@@ -40,6 +40,7 @@
                 <th>数量</th>
                 <th>小計</th>
                 <th>制作ステータス</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -49,7 +50,7 @@
                 <td><%= order_detail.price.to_s(:delimited) %></td>
                 <td><%= order_detail.amount %></td>
                 <td><%= order_detail.sum_of_price.to_s(:delimited) %></td>
-                <%= form_with model:order_detail, url: admin_order_detail_path(order_detail.id) do |f| %>
+                <%= form_with model:order_detail, url: admin_order_detail_path(order_detail.id), method: :patch do |f| %>
                 <td><%= f.select :making_status, OrderDetail.making_statuses_i18n.keys.map{|k| [I18n.t("enums.order_detail.making_status.#{k}"), k]} %></td>
                 <td><%= f.submit "更新", class: "btn btn-success" %></td>
                 <% end %>
@@ -76,6 +77,6 @@
               <td><strong><%= (@order.postage + @total.round).to_s(:delimited) %>円</strong></td>
             </tr>
           </table>
-        </div>  
+        </div>
     </div>
 </div>

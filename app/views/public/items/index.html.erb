@@ -12,6 +12,8 @@
         <p>¥<%= item.add_tax_price.to_s(:delimited) %></p>
       </div>
     <% end %>
+  </div>
+  <div class="row justify-content-center">
     <%= paginate @items %>
   </div>
 </div>
